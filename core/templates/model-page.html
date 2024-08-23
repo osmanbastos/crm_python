@@ -16,12 +16,15 @@
         
     </header>
 
-    <main class="flex-shrink-0">
-        {% block content %}
-        {% endblock %}
+    <main class="flex-shrink-0 mt-3">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+
+        </div>
     </main>
 
-    <footer class="py-2 text-white-50 bg-secondary">
+    <footer class="py-2 mt-1 text-white-50 bg-secondary">
         {% include 'model-footer.html' %}
     </footer>
 
@@ -37,7 +40,6 @@
         }
         footer {
             flex-shrink: none;
-            margin-top: 2em;
         }
     </style>
 </body>
