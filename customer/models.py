@@ -13,8 +13,10 @@ class Customer(models.Model):
     address_number = models.CharField(max_length=10)
     created_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
-    class_time = models.TimeField(auto_now=False, auto_now_add=False)
+    class_time = models.CharField(max_length=5, default='00:00')
     active = models.BooleanField(default=True)
+    evolution_field = models.CharField(max_length=500, blank=True, null=True)
+    evolution_updated = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name

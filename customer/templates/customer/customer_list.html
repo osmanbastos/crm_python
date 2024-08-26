@@ -3,7 +3,7 @@
 {% block content %}
     <h2>Clientes</h2>
 
-    <a href="#" %}">
+    <a href="#">
         <button type="button" class="btn btn-success" 
             style="float: right; margin-bottom: 5px">Adicionar</button>
     </a>
@@ -15,30 +15,32 @@
         <button type="submit" class="btn btn-primary">Buscar</button>
     <form>
 
-    <!-- <table class="table table-bordered mt-4 table-responsive-md">
+    <table class="table table-bordered mt-4 table-responsive-md">
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Cidade</th>
+                <th>Horário</th>
                 <th>Telefone</th>
                 <th>Email</th>
+                <th>Ativo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             {% for customer in customer_list%}
                 <tr>
-                    <td><a href="{{ customer.get_absolute_url }}">{{ customer.get_full_name }}</a></td>
-                    <td>{{ customer.get_full_city }}</td>
-                    <td>{{ customer.get_full_phone_number }}</td>
+                    <td><a href="{{ customer.get_absolute_url }}">{{ customer.first_name }}</a></td>
+                    <td>{{ customer.class_time }}</td>
+                    <td>{{ customer.phone }}</td>
                     <td>{{ customer.email }}</td>
+                    <td>{{ customer.active }}</td>
                     <form method="post" action="{{ customer.get_delete_url }}">{% csrf_token %}
                         <td><button type="submit" class="btn btn-danger">Excluir</button></td>
                     </form>
                 </tr>
             {% endfor %}
         </tbody>
-    </table> -->
+    </table>
 
     
     <ul class="pagination">
