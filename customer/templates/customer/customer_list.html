@@ -10,49 +10,49 @@
 
     <form>
         <div class="form-group mb-1">
-            <input class="form-control" type="text" name="name" placeholder="Buscar por nome...">            
+            <input class="form-control" type="text" name="name" placeholder="Buscar por nome, email, tel(sem ddd)...">            
         </div>
         <button type="submit" class="btn btn-primary">Buscar</button>
     <form>
-
-    <table class="table table-bordered mt-4 table-responsive-md">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Horário</th>
-                <th>Telefone</th>
-                <th>Email</th>
-                <th>Ativo</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for customer in customer_list%}
+    
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-responsive-md">
+            <thead>
                 <tr>
-                    <td><a href="{{ customer.get_absolute_url }}">{{ customer.get_full_name }}</a></td>
-                    <td>{{ customer.class_time }}</td>
-                    <td>{{ customer.get_full_phone }}</td>
-                    <td>{{ customer.email }}</td>
-                    <td>{{ customer.active }}</td>
-                    <form method="post" action="{{ customer.get_delete_url }}">{% csrf_token %}
+                    <th>Nome</th>
+                    <th>Horário</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Ativo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customer_list%}
+                    <tr>
+                        <td><a href="{{ customer.get_absolute_url }}">{{ customer.get_full_name }}</a></td>
+                        <td>{{ customer.class_time }}</td>
+                        <td>{{ customer.get_full_phone }}</td>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.active|yesno:"Sim,Não" }}</td>
                         <td style="display: flex; flex-direction: row; justify-content: center;">
-                            <button type="submit" class="m-1 btn-danger"><i class="material-icons align-middle text-white">delete</i></button>
+                                <a href="{{ customer.get_absolute_url }}"><button type="button" class="m-1 btn-success"><i class="material-icons align-middle text-white">edit</i></button></a>
+                            <form method="post" action="{{ customer.get_delete_url }}" onsubmit="return confirmDeletion();">{% csrf_token %}
+                                    <button type="submit" class="m-1 btn-danger"><i class="material-icons align-middle text-white">delete</i></button>
+                            </form>
                             <button type="button" class="m-1 btn-link" onclick="toggleDetails('{{ customer.id }}')"><i class="material-icons align-middle">expand_more</i></button>
+                         </td>
+                        
+                    </tr>
+                    <tr id="details-{{ customer.id }}" style="display: none;">
+                        <td colspan="6">
+                            <p><strong>Observações:</strong> {{ customer.evolution_field }} - Atualizado: {{ customer.get_full_evolution }}</p>
                         </td>
-                    </form>
-                </tr>
-                <tr id="details-{{ customer.id }}" style="display: none;">
-                    <td colspan="6">
-                        <p><strong>Observações:</strong> {{ customer.get_full_evolution }}</p>
-                        <form method="post" action="{{ customer.get_delete_url }}">{% csrf_token %}
-                            <button type="submit" class="m-1 btn btn-success"><i class="material-icons align-middle text-white">post_add</i></button>
-                            <button type="submit" class="m-1 btn btn-success"><i class="material-icons align-middle text-white">edit</i></button>
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     
     <ul class="pagination">
@@ -83,6 +83,10 @@
             } else {
                 detailsRow.style.display = 'none';
             }
+        }
+
+        function confirmDeletion() {
+            return confirm("Tem certeza que deseja excluir este cliente? (Esta ação não poderá ser desfeita)");
         }
     </script>
 

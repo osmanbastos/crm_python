@@ -2,17 +2,40 @@ from django import forms
 
 from .models import Customer
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
+
+class EmailInput(forms.EmailInput):
+    input_type = 'email'
 class CustomerForm(forms.ModelForm):
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    email = forms.EmailField()
-    birth_date = forms.DateField()
-    area_code = forms.CharField()
-    phone = forms.CharField()
-    address = forms.CharField()
-    address_number = forms.CharField()
-    class_time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
-    evolution_field = forms.CharField()
+    first_name = forms.CharField(
+        label="Nome",
+        error_messages={'max_length': 'Não pode ter mais de 30 caracteres'},
+        )
+    last_name = forms.CharField(
+        label="Sobrenome",
+        error_messages={'max_length': 'Não pode ter mais de 50 caracteres'},
+        )
+    email = forms.EmailField(label="E-mail", widget=EmailInput())
+    birth_date = forms.DateField(label="Data de nascimento", widget=DateInput())
+    area_code = forms.RegexField(
+        label="DDD",
+        regex=r'^\+?1?[0-9]{2}$',
+        error_messages={'invalid': 'Digite um DDD válido'}
+    )
+    phone = forms.RegexField(
+        label="Telefone",
+        regex=r'^\+?1?[0-9]{9}$',
+        error_messages={'invalid': 'Digite um telefone válido'}
+    )
+    address = forms.CharField(label="Endereço")
+    address_number = forms.CharField(label="CEP")
+    class_time = forms.TimeField(widget=TimeInput(format='%H:%M'), label="Horário da aula")
+    active = forms.RadioSelect()
+    evolution_field = forms.CharField(label="Observações", widget=forms.Textarea)
 
     class Meta:
         model = Customer
@@ -26,5 +49,6 @@ class CustomerForm(forms.ModelForm):
             "address",
             "address_number",
             "class_time",
+            "active",
             "evolution_field",
         )
