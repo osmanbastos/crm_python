@@ -1,2 +1,10 @@
-# Python #
+*log
+*.pyc
+__pycache__/
+.env
+.venv
 /.venv
+db.sqlite3
+.*_cache
+.vscode
+local_settings.py
