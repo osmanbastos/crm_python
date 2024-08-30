@@ -21,6 +21,11 @@ class CustomerForm(forms.ModelForm):
         )
     email = forms.EmailField(label="E-mail", widget=EmailInput())
     birth_date = forms.DateField(label="Data de nascimento", widget=DateInput())
+    cpf_field = forms.RegexField(
+        label="CPF",
+        regex=r'^\+?1?[0-9]{11}$',
+        error_messages={'invalid': 'Digite um CPF válido'}
+    )
     area_code = forms.RegexField(
         label="DDD",
         regex=r'^\+?1?[0-9]{2}$',
@@ -29,7 +34,8 @@ class CustomerForm(forms.ModelForm):
     phone = forms.RegexField(
         label="Telefone",
         regex=r'^\+?1?[0-9]{9}$',
-        error_messages={'invalid': 'Digite um telefone válido'}
+        error_messages={'invalid': 'Digite um telefone válido'},
+        widget=forms.TextInput(attrs={'placeholder': "Digite o CPF sem pontos ou traços"})
     )
     address = forms.CharField(label="Endereço")
     address_number = forms.CharField(label="CEP")
@@ -43,6 +49,7 @@ class CustomerForm(forms.ModelForm):
             "first_name",
             "last_name",
             "email",
+            "cpf_field",
             "birth_date",
             "area_code",
             "phone",

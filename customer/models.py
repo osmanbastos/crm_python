@@ -8,6 +8,7 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)
     birth_date = models.DateField()
+    cpf_field = models.CharField(max_length=11, unique=True, blank=True, null=True)
     area_code = models.CharField(max_length=2)
     phone = models.CharField(max_length=9)
     address = models.CharField(max_length=100)

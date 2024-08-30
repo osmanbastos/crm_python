@@ -1,5 +1,24 @@
 {% extends "model-page.html" %}
 
 {% block content %}
- <h1>Conteúdo</h1>
+ <h1>Instruções de uso:</h1>
+ <ol>
+    <li>
+         <strong>Consultar clientes:</strong> Clique na aba "Clientes" para visualizar a lista completa de clientes cadastrados ou em "Horários" para filtrar por horário de aula.
+        <li>1.1 Na aba "Clientes", é possível pesquisar por nome, email ou telefone.</li>
+    </li>
+    <li>
+        <strong>Cadastrar novo cliente:</strong> Na aba de "Clientes", clique em "Adicionar" e preencha os campos obrigatórios. Clique em "Salvar" para confirmar o cadastro. Para cancelar basta clicar em outra aba.
+    </li>
+    <li>
+        <strong>Editar cliente:</strong> Na aba de "Clientes", clique no ícone de edição (lápis) ao lado do cliente que deseja editar. Faça as alterações necessárias e clique em "Salvar" para confirmar. Para cancelar basta clicar em outra aba.
+    </li>
+    <li>
+        <strong>Excluir cliente:</strong> Na aba de "Clientes", clique no ícone de exclusão (lixeira) ao lado do cliente que deseja excluir. Confirme a exclusão clicando em "Sim" ou cancele clicando em "Cancelar".
+    </li>
+    <li>
+        <strong>Consultar horários:</strong> Clique na aba "Horários" para visualizar a lista de horários disponíveis. É possível filtrar por horário de aula.
+    </li>
+</ol>
+ 
 {% endblock %}
