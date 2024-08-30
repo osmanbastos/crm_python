@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-seb$gjq7*9cxh9x-9@wbfjor6)fgi3(w%-dl^wb=l1c#6nx7l(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['cadastro-clientes.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'crud_django.wsgi.application'
 #     }
 # }
 DATABASES = {}
-DATABASES['default'] = dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}")
 
 
 # Password validation
